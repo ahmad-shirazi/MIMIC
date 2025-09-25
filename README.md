@@ -12,28 +12,7 @@ MIMIC-VQA is a two-phase framework that transfers expert reasoning from a powerf
 
 ## Architecture
 
-```
-Phase A - Teacher Expert Data Generation (Yellow)
-┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌──────────────┐
-│ OCR Extract │ -> │ FindText QA  │ -> │ GroundAnswer│ -> │ Format String│
-│ tokens &    │    │ over context │    │ maps answer │    │ with reasoning│
-│ bboxes      │    │ returns text │    │ text to bbox│    │ and location │
-└─────────────┘    └──────────────┘    └─────────────┘    └──────────────┘
-
-Phase B - Student Training (Blue)  
-┌─────────────┐    ┌──────────────┐    ┌─────────────┐    ┌──────────────┐
-│ Base VLM    │ -> │ Iterative    │ -> │ Student VLM │ -> │ Cross-entropy│
-│ Gemma 3-27B │    │ magnitude    │    │ Gemma 3-9B  │    │ on teacher   │
-│             │    │ pruning      │    │             │    │ strings      │
-└─────────────┘    └──────────────┘    └─────────────┘    └──────────────┘
-
-Phase C - Inference (Green)
-┌─────────────┐    ┌──────────────┐    ┌─────────────┐
-│ Student     │ -> │ Parse outputs│ -> │ Answer +    │
-│ generates   │    │ reasoning &  │    │ BBox coords │
-│ reasoning   │    │ final answer │    │             │
-└─────────────┘    └──────────────┘    └─────────────┘
-```
+![MIMIC-Model](img/mimic.png)
 
 ## Features
 
