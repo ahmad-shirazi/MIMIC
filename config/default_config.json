@@ -1,0 +1,56 @@
+{
+  "model": {
+    "teacher_planner": "llama-4-scout",
+    "teacher_qa": "gemini-1.5-pro",
+    "student_base": "gemini-3-27b",
+    "student_target": "gemini-3-9b",
+    "base_model_path": "google/gemma-2-27b-it",
+    "student_model_path": "google/gemma-2-9b-it",
+    "use_4bit": true,
+    "use_8bit": false
+  },
+  "training": {
+    "num_epochs": 3,
+    "batch_size": 4,
+    "learning_rate": 1e-4,
+    "warmup_steps": 100,
+    "max_grad_norm": 1.0,
+    "target_sparsity": 0.65,
+    "pruning_frequency": 100,
+    "temperature": 4.0,
+    "alpha": 0.7,
+    "num_gpus": 4,
+    "mixed_precision": "fp16",
+    "gradient_checkpointing": true
+  },
+  "data": {
+    "max_sequence_length": 2048,
+    "max_bbox_tokens": 100,
+    "ocr_engine": "paddleocr",
+    "ocr_confidence_threshold": 0.5,
+    "top_k_segments": 10,
+    "similarity_threshold": 0.3,
+    "context_window": 512,
+    "train_data_path": "data/train",
+    "val_data_path": "data/val",
+    "test_data_path": "data/test",
+    "expert_data_path": "data/expert_traces"
+  },
+  "inference": {
+    "max_new_tokens": 512,
+    "do_sample": true,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "top_k": 50,
+    "use_constrained_decoding": true,
+    "coordinate_tolerance": 5,
+    "return_reasoning": true,
+    "return_confidence": true
+  },
+  "device": "cuda",
+  "seed": 42,
+  "log_level": "INFO",
+  "output_dir": "outputs",
+  "checkpoint_dir": "checkpoints",
+  "log_dir": "logs"
+}
